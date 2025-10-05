@@ -1,0 +1,26 @@
+NAME = a.out
+
+SRCS = main.cpp Fixed.cpp Point.cpp bsp.cpp 
+OBJS = $(SRCS:.cpp=.o)
+
+CXX = c++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	@$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
+	@echo "\033[32m✔ Compilation successful!\033[0m"
+
+%.o: %.cpp Fixed.hpp Point.hpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+clean:
+	rm -f $(OBJS)
+
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re
