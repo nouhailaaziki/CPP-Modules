@@ -4,6 +4,18 @@ This repository serves as a technical compendium for mastering C++ (C++98). It c
 
 ---
 
+# Table of Contents
+
+- [The Foundation: Object-Oriented Programming](#the-foundation--object--oriented-programming)
+- [Class Architecture & Lifecycle](#class-architecture-&-lifecycle)
+- [Memory & Resource Management](#memory-&-resource-management)
+- [Pointers, References, and Namespaces](#pointers,-references,-and-namespaces)
+- [Exception Handling & Logic Flow](#exception-handling-&-logic-flow)
+- [Templates & Containers](#templates-&-containers)
+- [C++98 vs. Modern C++: Quick Reference](#c++98-vs.-modern-c++--quick-reference)
+
+---
+
 ## 1. The Foundation: Object-Oriented Programming
 
 OOP shifts the focus from "steps of execution" to "interactions between entities."
