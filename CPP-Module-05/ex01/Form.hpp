@@ -10,6 +10,8 @@ class Form {
 		const int			gradeToSign;
 		const int			gradeToExecute;
 
+		int	checkGrade(int grade);
+
 	public:
 		Form();
 		Form(const std::string& _name, const int& gts, const int& gte);
@@ -21,7 +23,7 @@ class Form {
 		int			getGradeToSign(void) const;
 		int			getGradeToExecute(void) const;
 		bool		getIndicator(void) const;
-		void		beSigned(Bureaucrat& bureacrat);
+		void		beSigned(Bureaucrat& bureaucrat);
 		
 		class GradeTooHighException : public std::exception {
 			public:

@@ -2,29 +2,32 @@
 
 Form::Form() : name("Default"), indicator(false),
     gradeToSign(150), gradeToExecute(150)
-{
-    std::cout << "Default Form Constructor Called\n";
-}
+{}
 
 Form::Form(const std::string& _name, const int& gts, const int& gte)
-    : name(_name), indicator(false), gradeToSign(gts), gradeToExecute(gte)
-{
-	if (gradeToSign < 1 || gradeToExecute < 1)
-		throw GradeTooHighException();
-	else if (gradeToSign > 150 || gradeToExecute > 150)
-		throw GradeTooLowException();
-    std::cout << "Parameterized Form Constructor Called\n";
-}
+    : name(_name), indicator(false),
+	gradeToSign(checkGrade(gts)), gradeToExecute(checkGrade(gte))
+{}
 
 Form::Form(const Form& other)
-	: name(other.getName()),indicator(other.getIndicator()),
-	gradeToSign(other.getGradeToSign()), gradeToExecute(other.getGradeToExecute())
+	: name(other.name),indicator(other.indicator),
+	gradeToSign(other.gradeToSign), gradeToExecute(other.gradeToExecute)
 {}
 
 Form& Form::operator=(const Form& other)
 {
-    indicator = other.getIndicator();
+	if (this != &other)
+    	indicator = other.indicator;
 	return (*this);
+}
+
+int Form::checkGrade(int grade)
+{
+	if (grade < 1)
+		throw GradeTooHighException();
+	else if (grade > 150)
+		throw GradeTooLowException();
+	return (grade);
 }
 
 std::string	Form::getName(void) const
@@ -47,15 +50,12 @@ bool	Form::getIndicator(void) const
     return (indicator);
 }
 
-void	Form::beSigned(Bureaucrat &bureacrat)
+void	Form::beSigned(Bureaucrat &bureaucrat)
 {
-	if (bureacrat.getGrade() > gradeToSign)
+	if (bureaucrat.getGrade() > gradeToSign)
         throw GradeTooLowException();
     if (indicator)
-	{
-		std::cout << "Form already signed\n";
         return ;
-	}
     indicator = true;
 }
 

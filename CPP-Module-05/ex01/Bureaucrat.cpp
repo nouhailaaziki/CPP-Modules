@@ -1,40 +1,30 @@
 #include "Form.hpp"
 
 Bureaucrat::Bureaucrat() : name("Default"), grade(150)
-{
-	std::cout << "[INIT] Bureaucrat [" << name
-			<< "] created with grade " << grade << ".\n";
-}
+{}
 
 Bureaucrat::Bureaucrat(const std::string& _name, int _grade)
-	: name(_name)
-{
-	if (_grade < 1)
-		throw GradeTooHighException();
-	else if (_grade > 150)
-		throw GradeTooLowException();
-	grade = _grade;
-	std::cout << "[INIT] Bureaucrat [" << name
-			<< "] created with grade " << grade << ".\n";
-}
+	: name(_name), grade(checkGrade(_grade))
+{}
 
 Bureaucrat::Bureaucrat(const Bureaucrat& other)
-	: name(other.getName()), grade(other.getGrade())
-{
-	std::cout << "[COPY] Bureaucrat [" << name 
-			<< "] has been duplicated. Duplicate holds grade "
-			<< grade << ".\n";
-}
+	: name(other.name), grade(other.grade)
+{}
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other)
 {
 	if (this != &other)
-	{
-		grade = other.getGrade();
-		std::cout << "[ASSIGN] Bureaucrat [" << name
-				<< "] copied grade from [" << other.getName() << "].\n";
-	}
+		grade = other.grade;
 	return (*this);
+}
+
+int	Bureaucrat::checkGrade(int grade)
+{
+	if (grade < 1)
+		throw GradeTooHighException();
+	else if (grade > 150)
+		throw GradeTooLowException();
+	return (grade);
 }
 
 std::string	Bureaucrat::getName() const
@@ -49,24 +39,12 @@ int Bureaucrat::getGrade() const
 
 void Bureaucrat::incrementGrade()
 {
-	std::cout << "Attempting to promote [" << name 
-			<< "] from grade " << grade << ".\n";
-	if (grade == 1)
-		throw GradeTooHighException();
-	grade--;
-	std::cout << "[" << name << "] successfully promoted to grade "
-			<< grade << ".\n";
+	grade = checkGrade(grade - 1);
 }
 
 void Bureaucrat::decrementGrade()
 {
-	std::cout << "Attempting to demote " << "[" << name 
-			<< "] from grade " << grade << ".\n";
-	if (grade == 150)
-		throw GradeTooLowException();
-	grade++;
-	std::cout << "[" << name << "] successfully demoted to grade "
-			<< grade << ".\n";
+	grade = checkGrade(grade + 1);
 }
 
 void Bureaucrat::signForm(Form &form)
@@ -78,7 +56,7 @@ void Bureaucrat::signForm(Form &form)
     }
     catch (std::exception &e)
     {
-        std::cout << name << " couldn’t sign "
+        std::cout << name << " couldn't sign "
                   << form.getName() << " because " << e.what() << std::endl;
     }
 }
@@ -101,7 +79,4 @@ std::ostream& operator<<(std::ostream& os, const Bureaucrat& obj)
 }
 
 Bureaucrat::~Bureaucrat()
-{
-	std::cout << "[EXIT] Bureaucrat " << name 
-			<< " has exited the bureaucracy." << std::endl;
-}
+{}
