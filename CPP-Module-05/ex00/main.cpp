@@ -8,8 +8,8 @@ int main()
         Bureaucrat a("Anna", 1);
         Bureaucrat b("Ben", 150);
 
-        std::cout << a;
-        std::cout << b;
+        std::cout << a << std::endl;
+        std::cout << b << std::endl;
     }
     catch (std::exception& e)
     {
@@ -38,11 +38,11 @@ int main()
     std::cout << "\n===== INCREMENT / DECREMENT =====\n";
     try
     {
-        Bureaucrat e("Ellie", 75);
-        std::cout << e;
+        Bureaucrat e("Ellie", 2);
+        std::cout << e << std::endl;
 
         e.incrementGrade(); // goes to 1
-        std::cout << e;
+        std::cout << e << std::endl;
 
         e.incrementGrade(); // should throw
     }
@@ -54,10 +54,10 @@ int main()
     try
     {
         Bureaucrat f("Felix", 149);
-        std::cout << f;
+        std::cout << f << std::endl;
 
         f.decrementGrade(); // goes to 150
-        std::cout << f;
+        std::cout << f << std::endl;
 
         f.decrementGrade(); // should throw
     }
@@ -73,16 +73,16 @@ int main()
         Bureaucrat x(g);
         Bureaucrat h("Henry", 100);
 
-        std::cout << g;
-        std::cout << x;
+        std::cout << g << std::endl;
+        std::cout << x << std::endl;
 
         h = g;
-        std::cout << h;
+        std::cout << h << std::endl;
     }
     catch (std::exception& e)
     {
         std::cout << e.what() << std::endl;
     }
-    
+
     return (0);
 }
