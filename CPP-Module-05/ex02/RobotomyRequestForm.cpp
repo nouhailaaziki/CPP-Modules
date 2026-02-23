@@ -2,19 +2,15 @@
 #include <iostream>
 
 RobotomyRequestForm::RobotomyRequestForm()
-    : AForm( "RobotomyRequestForm", 72, 45 )
-{
-	std::cout << "Form type: RobotomyRequestForm" << std::endl;
-}
+    : AForm("RobotomyRequestForm", 72, 45), target("Default")
+{}
 
 RobotomyRequestForm::RobotomyRequestForm(std::string const target)
     : AForm( "RobotomyRequestForm", 72, 45 ), target(target)
-{
-	std::cout << "Form type: RobotomyRequestForm" << std::endl;
-}
+{}
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &other)
-    : AForm(other)
+    : AForm(other), target(other.target)
 {}
 
 RobotomyRequestForm	&RobotomyRequestForm::operator=( const RobotomyRequestForm &other)

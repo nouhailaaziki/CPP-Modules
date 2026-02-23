@@ -1,19 +1,15 @@
 #include "ShrubberyCreationForm.hpp"
 
 ShrubberyCreationForm::ShrubberyCreationForm()
-    : AForm("ShrubberyCreationForm", 145, 137)
-{
-	std::cout << "Form type: ShrubberyCreationForm" << std::endl;
-}
+    : AForm("ShrubberyCreationForm", 145, 137), target("Default")
+{}
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string const target)
     : AForm("ShrubberyCreationForm", 145, 137), target(target)
-{
-	std::cout << "Form type: ShrubberyCreationForm" << std::endl;
-}
+{}
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other)
-    : AForm(other)
+    : AForm(other), target(other.target)
 {}
 
 ShrubberyCreationForm	&ShrubberyCreationForm::operator=(const ShrubberyCreationForm &other)
@@ -26,9 +22,16 @@ ShrubberyCreationForm	&ShrubberyCreationForm::operator=(const ShrubberyCreationF
 	return (*this);
 }
 
+const char* ShrubberyCreationForm::FileOpenException::what() const throw()
+{
+	return ("cannot open or create the shrubbery file.");
+}
+
 void    ShrubberyCreationForm::executeAction() const
 {
 	std::ofstream file((target + "_shrubbery").c_str());
+	if (!file)
+    	throw FileOpenException();
 	file << "⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⢿⠿⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\n"
 		 << "⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠀⠀⠀⠀⠉⠙⠿⢿⡿⠿⠁⠀⠀⠀⠀⠀⠈⠙⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\n"
 		 << "⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠁⠀⠀⠀⠀⠀⠀⠉⠙⠿⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\n"

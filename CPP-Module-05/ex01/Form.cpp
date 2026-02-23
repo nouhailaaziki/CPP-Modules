@@ -4,7 +4,7 @@ Form::Form() : name("Default"), indicator(false),
     gradeToSign(150), gradeToExecute(150)
 {}
 
-Form::Form(const std::string& _name, const int& gts, const int& gte)
+Form::Form(const std::string& _name, const int gts, const int gte)
     : name(_name), indicator(false),
 	gradeToSign(checkGrade(gts)), gradeToExecute(checkGrade(gte))
 {}
@@ -61,12 +61,12 @@ void	Form::beSigned(Bureaucrat &bureaucrat)
 
 const char* Form::GradeTooHighException::what() const throw()
 {
-	return ("[ERROR] Grade too high.");
+	return ("Grade too high.");
 }
 
 const char* Form::GradeTooLowException::what() const throw()
 {
-	return ("[ERROR] Grade too low.");
+	return ("Grade too low.");
 }
 
 std::ostream& operator<<(std::ostream& os, const Form& obj)

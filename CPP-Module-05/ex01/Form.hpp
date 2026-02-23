@@ -14,7 +14,7 @@ class Form {
 
 	public:
 		Form();
-		Form(const std::string& _name, const int& gts, const int& gte);
+		Form(const std::string& _name, const int gts, const int gte);
 		Form(const Form& other);
 		Form& operator=(const Form& other);
 		~Form();
@@ -27,12 +27,12 @@ class Form {
 		
 		class GradeTooHighException : public std::exception {
 			public:
-				virtual const char *what(void) const throw();
+				virtual const char* what(void) const throw();
 		};
 
 		class GradeTooLowException : public std::exception {
 			public:
-				virtual const char *what(void) const throw();
+				virtual const char* what(void) const throw();
 		};
 };
 
