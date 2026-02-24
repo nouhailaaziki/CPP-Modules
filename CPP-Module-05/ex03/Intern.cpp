@@ -15,37 +15,33 @@ Intern &Intern::operator=(const Intern &)
     return (*this);
 }
 
-AForm* Intern::createShrubbery(std::string const &target)
+const char* Intern::FormNotFoundException::what() const throw()
 {
-	return (new ShrubberyCreationForm(target));
-}
-
-AForm* Intern::createRobotomy(std::string const &target)
-{
-	return (new RobotomyRequestForm(target));
-}
-
-AForm* Intern::createPresidential(std::string const &target)
-{
-	return (new PresidentialPardonForm(target));
+	return ("Intern cannot create the form.");
 }
 
 AForm* Intern::makeForm(std::string const &formName, std::string const &target)
 {
 	std::string names[3] = {"shrubbery creation",
         "robotomy request", "presidential pardon"};
-	AForm* (Intern::*creators[3])(std::string const &) = {&Intern::createShrubbery,
-		&Intern::createRobotomy, &Intern::createPresidential};
-	for (int i = 0; i < 3; i++)
+	int i = 0;
+	while (i < 3)
 	{
-		if (formName == names[i])
-		{
-			std::cout << "Intern creates " << formName << std::endl;
-			return ((this->*creators[i])(target));
-		}
+		if (!formName.compare(names[i]))
+			break;
+		i++;
 	}
-	std::cout << "Intern cannot create form \"" << formName << "\"" << std::endl;
-	return (NULL);
+	switch (i)
+	{
+		case 0:
+			return (new ShrubberyCreationForm(target));
+		case 1:
+			return (new RobotomyRequestForm(target));
+		case 2:
+			return (new PresidentialPardonForm(target));
+		default:
+			throw FormNotFoundException();
+	}
 }
 
 Intern::~Intern()

@@ -2,7 +2,7 @@
 
 int main()
 {
-    std::cout << "===== BASIC CONSTRUCTION =====\n";
+    std::cout << "--- BASIC CONSTRUCTION ---\n";
     try
     {
         Bureaucrat a("Anna", 1);
@@ -16,7 +16,7 @@ int main()
         std::cout << e.what() << std::endl;
     }
 
-    std::cout << "\n===== INVALID CONSTRUCTION =====\n";
+    std::cout << "\n--- INVALID CONSTRUCTION ---\n";
     try
     {
         Bureaucrat c("Cecilia", -1); // too high
@@ -35,7 +35,7 @@ int main()
         std::cout << e.what() << std::endl;
     }
 
-    std::cout << "\n===== INCREMENT / DECREMENT =====\n";
+    std::cout << "\n--- INCREMENT / DECREMENT ---\n";
     try
     {
         Bureaucrat e("Ellie", 2);
@@ -66,7 +66,7 @@ int main()
         std::cout << e.what() << std::endl;
     }
 
-    std::cout << "\n===== COPY & ASSIGNMENT =====\n";
+    std::cout << "\n--- COPY & ASSIGNMENT ---\n";
     try
     {
         Bureaucrat g("Giselle", 42);

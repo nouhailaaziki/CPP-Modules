@@ -10,12 +10,14 @@ class AForm {
 		const int			gradeToSign;
 		const int			gradeToExecute;
 
+		int	checkGrade(int grade);
+
     protected:
 		virtual void    executeAction() const = 0;
 
 	public:
 		AForm();
-		AForm(const std::string& _name, const int& gts, const int& gte);
+		AForm(const std::string& _name, int gts, int gte);
 		AForm(const AForm& other);
 		AForm& operator=(const AForm& other);
 		virtual ~AForm();
@@ -24,22 +26,22 @@ class AForm {
 		int			getGradeToSign(void) const;
 		int			getGradeToExecute(void) const;
 		bool		getIndicator(void) const;
-		void		beSigned(Bureaucrat& bureacrat);
-		void		execute(Bureaucrat const & executor) const;
+		void		beSigned(Bureaucrat const& bureaucrat);
+		void		execute(Bureaucrat const& executor) const;
 
 		class GradeTooHighException : public std::exception {
 			public:
-				virtual const char *what(void) const throw();
+				virtual const char* what(void) const throw();
 		};
 
 		class GradeTooLowException : public std::exception {
 			public:
-				virtual const char *what(void) const throw();
+				virtual const char* what(void) const throw();
 		};
 
         class FormNotSignedException : public std::exception {
 			public:
-				const char* what() const throw();
+				virtual const char* what() const throw();
 		};
 };
 

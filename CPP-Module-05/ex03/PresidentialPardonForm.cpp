@@ -2,16 +2,12 @@
 #include <iostream>
 
 PresidentialPardonForm::PresidentialPardonForm()
-    : AForm("PresidentialPardonForm", 25, 5)
-{
-	std::cout << "Form type: PresidentialPardonForm" << std::endl;
-}
+    : AForm("PresidentialPardonForm", 25, 5), target("Default")
+{}
 
-PresidentialPardonForm::PresidentialPardonForm(std::string const target)
+PresidentialPardonForm::PresidentialPardonForm(std::string const& target)
     : AForm("PresidentialPardonForm", 25, 5), target(target)
-{
-	std::cout << "Form type: PresidentialPardonForm" << std::endl;
-}
+{}
 
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &other)
     : AForm(other), target(other.target)

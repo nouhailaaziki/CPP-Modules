@@ -13,10 +13,11 @@ class Intern {
 
 		AForm* makeForm(std::string const &formName, std::string const &target);
 
-	private:
-		AForm* createShrubbery(std::string const &target);
-		AForm* createRobotomy(std::string const &target);
-		AForm* createPresidential(std::string const &target);
+		class FormNotFoundException : public std::exception {
+			public:
+				virtual const char* what() const throw();
+		};
+
 };
 
 #endif

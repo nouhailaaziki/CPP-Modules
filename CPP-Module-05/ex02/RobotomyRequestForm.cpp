@@ -1,5 +1,6 @@
 #include "RobotomyRequestForm.hpp"
 #include <iostream>
+#include <ctime>
 
 RobotomyRequestForm::RobotomyRequestForm()
     : AForm("RobotomyRequestForm", 72, 45), target("Default")
@@ -25,6 +26,12 @@ RobotomyRequestForm	&RobotomyRequestForm::operator=( const RobotomyRequestForm &
 
 void RobotomyRequestForm::executeAction() const
 {
+	static bool seed = false;
+	if (!seed)
+	{
+		std::srand(std::time(NULL));
+		seed = true;
+	}
 	std::cout << "* drilling noises *\n";
 	if (std::rand() % 2)
 		std::cout << target << " has been robotomized successfully\n";

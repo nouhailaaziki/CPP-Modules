@@ -17,6 +17,11 @@ class ShrubberyCreationForm : public AForm {
 		ShrubberyCreationForm(const ShrubberyCreationForm &other);
 		ShrubberyCreationForm	&operator=(const ShrubberyCreationForm &other);
 		~ShrubberyCreationForm();
+
+		class FileOpenException : public std::exception {
+			public:
+				virtual const char* what() const throw();
+		};
 };
 
 #endif
