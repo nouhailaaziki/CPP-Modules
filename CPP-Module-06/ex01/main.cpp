@@ -2,23 +2,25 @@
 
 int main()
 {
-    Data* ptr = new Data();
+    Data data;
 
-    ptr->username = "noaziki";
-    ptr->gender = "Female";
-    ptr->id = "LB-4409-PX";
-    ptr->position = "Lead Systems Architect";
-    ptr->age = 32;
-    ptr->years_of_experience = 11;
+    data.username = "noaziki";
+    data.gender = "Female";
+    data.id = "LB-4409-PX";
+    data.position = "Lead Systems Architect";
+    data.age = 32;
+    data.years_of_experience = 11;
 
-    Data* original = ptr;
+    Data* original = &data;
 
-    std::cout << "Original pointer: " << ptr << std::endl;
+    std::cout << "Original pointer: " << original << std::endl;
 
-    uintptr_t raw = Serializer::serialize(ptr);
+    uintptr_t raw = Serializer::serialize(original);
+
     std::cout << "Serialized value: " << raw << std::endl;
 
     Data* restored = Serializer::deserialize(raw);
+
     std::cout << "Deserialized pointer: " << restored << std::endl;
 
     if (original == restored)
@@ -26,5 +28,5 @@ int main()
     else
         std::cout << "ERROR: pointers are NOT equal" << std::endl;
 
-    delete ptr;
+    return (0);
 }

@@ -1,22 +1,5 @@
 #include "ScalarConverter.hpp"
 
-#include <iostream>
-#include <iomanip>
-#include <limits>
-#include <cstdlib>
-#include <cctype>
-
-ScalarConverter::ScalarConverter()
-{}
-
-ScalarConverter::ScalarConverter(const ScalarConverter&)
-{}
-
-ScalarConverter& ScalarConverter::operator=(const ScalarConverter&)
-{
-	return (*this);
-}
-
 static bool isPseudoLiteral(const std::string& str)
 {
 	return (
@@ -71,27 +54,56 @@ static void printFloat(double value)
 
 	float f = static_cast<float>(value);
 
-	if (f == static_cast<int>(f))
+	if ((value > std::numeric_limits<float>::max()
+		|| value < -std::numeric_limits<float>::max())
+		&& value == value
+		&& value != std::numeric_limits<double>::infinity()
+		&& value != -std::numeric_limits<double>::infinity())
+	{
+		std::cout << "impossible\n";
+		return;
+	}
+
+	if (f >= std::numeric_limits<int>::min()
+		&& f <= std::numeric_limits<int>::max()
+		&& f == static_cast<int>(f))
+	{
 		std::cout << std::fixed << std::setprecision(1);
+	}
 
 	std::cout << f << "f\n";
+
+	std::cout.unsetf(std::ios::floatfield);
+	std::cout << std::setprecision(6);
 }
 
 static void printDouble(double value)
 {
 	std::cout << "double: ";
 
-	if (value == static_cast<int>(value))
+	if (value >= std::numeric_limits<int>::min()
+		&& value <= std::numeric_limits<int>::max()
+		&& value == static_cast<int>(value))
+	{
 		std::cout << std::fixed << std::setprecision(1);
+	}
 
 	std::cout << value << "\n";
+
+	std::cout.unsetf(std::ios::floatfield);
+	std::cout << std::setprecision(6);
 }
 
-void ScalarConverter::convert(std::string& input)
+void ScalarConverter::convert(const std::string& input)
 {
 	double	value;
 	char*	end;
 
+	if (input.empty())
+	{
+    	std::cout << "Error: invalid input\n";
+    	return;
+	}
 	// char
 	if (input.length() == 1
 		&& !std::isdigit(input[0]))
@@ -136,6 +148,3 @@ void ScalarConverter::convert(std::string& input)
 	printFloat(value);
 	printDouble(value);
 }
-
-ScalarConverter::~ScalarConverter()
-{}

@@ -2,16 +2,21 @@
 # define SCALARCONVERTER_HPP
 
 # include <iostream>
+# include <string>
+# include <iomanip>
+# include <limits>
+# include <cstdlib>
+# include <cctype>
 
 class ScalarConverter {
     private:
         ScalarConverter();
-        ScalarConverter(const ScalarConverter&);
-        ScalarConverter& operator=(const ScalarConverter&);
+        ScalarConverter(const ScalarConverter& other);
+        ScalarConverter& operator=(const ScalarConverter& other);
         ~ScalarConverter();
 
     public:
-        static  void    convert(std::string& input);
+        static  void    convert(const std::string& input);
 };
 
 #endif
