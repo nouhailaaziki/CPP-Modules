@@ -1,6 +1,4 @@
 #include "iter.hpp"
-#include <iostream>
-#include <string>
 
 template <typename Type>
 void	print(const Type& value)

@@ -3,30 +3,11 @@
 
 # include <iostream>
 
-// Non-const array version
-template <typename Type>
-void	iter(Type* arr, size_t len, void (*func)(Type&))
+template <typename Type, typename Func>
+void    iter(Type* arr, const size_t len, Func func)
 {
-	size_t i = 0;
-
-	while (i < len)
-	{
-		func(arr[i]);
-		i++;
-	}
-}
-
-// Const array version
-template <typename Type>
-void	iter(const Type* arr, size_t len, void (*func)(const Type&))
-{
-	size_t i = 0;
-
-	while (i < len)
-	{
-		func(arr[i]);
-		i++;
-	}
+    for (size_t i = 0; i < len; i++)
+        func(arr[i]);
 }
 
 #endif
