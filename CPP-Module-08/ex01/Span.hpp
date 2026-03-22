@@ -4,6 +4,8 @@
 # include <vector>
 # include <algorithm>
 # include <stdexcept>
+# include <iterator>
+# include <cstddef>
 
 class Span
 {
@@ -20,8 +22,19 @@ class Span
 
         void    addNumber(int num);
 
-        int     shortestSpan() const;
-        int     longestSpan() const;
+        template <typename Iterator>
+        void addRange(Iterator begin, Iterator end)
+        {
+            std::ptrdiff_t dist = std::distance(begin, end);
+
+            if (dist > 0 && _span.size() + static_cast<size_t>(dist) > _N)
+                throw std::runtime_error("Span capacity exceeded!");
+
+            _span.insert(_span.end(), begin, end);
+        }
+
+        unsigned int     shortestSpan() const;
+        unsigned int     longestSpan() const;
 };
 
 #endif

@@ -6,10 +6,8 @@ Span::Span() : _N(0)
 Span::Span(unsigned int N) : _N(N)
 {}
 
-Span::Span(const Span& other)
-{
-    *this = other;
-}
+Span::Span(const Span& other) : _span(other._span), _N(other._N)
+{}
 
 Span& Span::operator=(const Span& other)
 {
@@ -27,40 +25,41 @@ Span::~Span()
 void Span::addNumber(int num)
 {
     if (_span.size() >= _N)
-        throw std::runtime_error("Span is full!!");
+        throw std::runtime_error("Span is full!");
 
     _span.push_back(num);
 }
 
-int Span::shortestSpan() const
+unsigned int Span::shortestSpan() const
 {
     if (_span.size() < 2)
-        throw std::runtime_error("Not enough numbers!!");
+        throw std::runtime_error("Not enough numbers to find a span!");
 
-    std::vector<int> copy = _span;
-
+    std::vector<int> copy(_span);
     std::sort(copy.begin(), copy.end());
 
-    int shortest = copy[1] - copy[0];
+    long long shortest = static_cast<long long>(copy[1]) - copy[0];
 
-    for (size_t i = 1; i < copy.size() - 1; i++)
+    for (size_t i = 2; i < copy.size(); i++)
     {
-        int diff = copy[i + 1] - copy[i];
-
+        long long diff = static_cast<long long>(copy[i]) - copy[i - 1];
         if (diff < shortest)
             shortest = diff;
     }
 
-    return (shortest);
+    return (static_cast<unsigned int>(shortest));
 }
 
-int Span::longestSpan() const
+unsigned int Span::longestSpan() const
 {
     if (_span.size() < 2)
-        throw std::runtime_error("Not enough numbers!!");
+        throw std::runtime_error("Not enough numbers to find a span!");
 
-    int min = *std::min_element(_span.begin(), _span.end());
-    int max = *std::max_element(_span.begin(), _span.end());
+    std::vector<int>::const_iterator minIt = std::min_element(_span.begin(), _span.end());
+    std::vector<int>::const_iterator maxIt = std::max_element(_span.begin(), _span.end());
 
-    return (max - min);
+    long long max = *maxIt;
+    long long min = *minIt;
+
+    return (static_cast<unsigned int>(max - min));
 }
